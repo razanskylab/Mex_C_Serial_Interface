@@ -15,11 +15,11 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
         mexPrintf("ERROR: Unable to create new serial port\n" );
         return;
     }
-//     /*
-//      * The port name is the device to open(/dev/ttyS0 on Linux,
-//      * COM1 on Windows)
-//      */
-    mexPrintf((const char*) portName);
+    /*
+     * The port name is the device to open(/dev/ttyS0 on Linux,
+     * COM1 on Windows)
+     */
+    // mexPrintf((const char*) portName);
     if( c_serial_set_port_name( m_port, (const char*) portName ) < 0 ){
         mexPrintf("ERROR: can't set port name\n" );
     }
@@ -31,15 +31,15 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     c_serial_set_stop_bits( m_port, CSERIAL_STOP_BITS_1 );
     c_serial_set_parity( m_port, CSERIAL_PARITY_NONE );
     c_serial_set_flow_control( m_port, CSERIAL_FLOW_NONE );
-    mexPrintf( ": Baud rate is %d\n", c_serial_get_baud_rate( m_port ) );
-//
-//     /*
-//      * We want to get all line flags when they change
-//      */
+    // mexPrintf( ": Baud rate is %d\n", c_serial_get_baud_rate( m_port ) );
+
+    /*
+     * We want to get all line flags when they change
+     */
 //    c_serial_set_serial_line_change_flags( m_port, CSERIAL_LINE_FLAG_ALL );
     status = c_serial_open( m_port );
     if( status < 0 ){
-        mexPrintf("ERROR: Can't open serial port\n" );
+        mexPrintf("ERROR: Can't open serial port" );
         return;
     }
     mxArray *out = mxCreateNumericMatrix(1, 1, mxUINT64_CLASS, mxREAL);
